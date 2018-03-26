@@ -1,0 +1,7 @@
+npm install -g vue-cil
+npm 淘宝镜像
+vue init webpack progressName
+cnpm install
+cnpm i minit-ui -S
+cnpm install mockjs
+npm i babel-plugin-component -D
