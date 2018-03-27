@@ -69,7 +69,9 @@ const actions = {
     if (bool) {
       Util.setLocal(++count, 'count')
     } else {
-      Util.setLocal(--count, 'count')
+      if (Util.getLocal('count') >= 1) {
+        Util.setLocal(--count, 'count')
+      }
     }
     commit('CHANGE_COUNT', Util.getLocal('count'))
   },
