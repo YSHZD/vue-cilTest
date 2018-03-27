@@ -7,10 +7,11 @@ const state = {
   productDatas: '',
   colSelected: 0,
   sizeSelected: 0,
-  count: 0
+  count: 0,
+  allplay: 0,
+  carList: Util.getLocal('carList') || 0
   // 全局加载状态的Loading
 }
-
 const mutations = {
   [types.SET_LOADING] (state, res) {
     state.fetchLoading = res
@@ -27,6 +28,12 @@ const mutations = {
   [types.CHANGE_COUNT] (state, res) {
     state.count = res
     console.log(res)
+  },
+  [types.ADD_CAR_LIST] (state, res) {
+    state.carList = Util.getLocal('carList')
+  },
+  [types.CAHNGE_CAR_LIST] (state, res) {
+    state.carList = Util.getLocal('carList')
   }
 }
 let vm = new Vue({})
@@ -40,8 +47,19 @@ const actions = {
       commit('SET_DATAS', res.data)
     })
   },
+  uplate ({commit}, product) {
+    Util.setLocal(product, 'carList')
+  },
+  addCarList ({commit}, product) {
+    Util.setLocal(product, 'carList', true)
+    commit('ADD_CAR_LIST')
+  },
   setSize ({commit}, num) {
     commit('CHANGE_SIZE_SELECTED', num)
+  },
+  cutCarList ({commit}, newProduct) {
+    Util.setLocal(newProduct, 'carList')
+    commit('CAHNGE_CAR_LIST')
   },
   setCount ({commit}, bool = true) {
     let count = Util.getLocal('count') || 0
@@ -55,7 +73,12 @@ const actions = {
 }
 
 const getters = {
-
+  count: function (state) {
+    return Util.getLocal('count') || 0
+  },
+  getCarList: function (state) {
+    return Util.getLocal('carList') || 0
+  }
 }
 
 export default {

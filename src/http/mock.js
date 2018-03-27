@@ -74,7 +74,8 @@ var detail = Mock.mock('http://api.com/detail', {
       'col|+1': ['土豪金', '银', '大红'],
       'size|+1': ['32g', '64g', '128g']
     }],
-    'id': '@id'
+    'id': '@id',
+    'num': 1
   }]
 })
 export default {index, category, detail}

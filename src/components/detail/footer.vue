@@ -41,6 +41,7 @@ export default {
         size: this.productDatasView.chose[this.sizeSelected].size,
         col: this.productDatasView.chose[this.colSelected].col,
         id: this.productDatasView.id,
+        num: this.productDatasView.num,
         imgPath: this.$store.state.detail.productDatas.swiper[0].imgPath,
         choseBool: false
       }]
@@ -52,6 +53,7 @@ export default {
         `商品ID:${product[0].id}</br>`
       ).then(action => {
         this.$store.dispatch('setCount', true)
+        this.$store.dispatch('addCarList', product)
         Toast({
           message: '添加成功',
           duration: 1000

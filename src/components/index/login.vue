@@ -1,6 +1,6 @@
 <template>
   <router-link :to="{name:'登入',params:{}}" class="login">
-    <span>登录后享受。。。</span>
+    <span>登录后享受激情</span>
     <span>去登入</span>
   </router-link>
 </template>
@@ -22,10 +22,11 @@ export default {}
     letter-spacing: .2vw;
   }
   span:last-of-type {
+    margin-left:20vw;
     color: rgba(0, 0, 0, .54);
     position: relative;
     .fz(font-size,26);
-    padding-right: 2vw;
+    padding-right: 1vw;
     &::after {
       content: '';
       position: absolute;
