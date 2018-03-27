@@ -17,12 +17,14 @@
 export default {
   data () {
     return {
-      count: 18
     }
   },
   computed: {
+    count () {
+      return this.$store.getters.selecteCount
+    },
     allplay () {
-      return this.$store.state.detail.allplay
+      return this.$store.getters.allplay
     }
   },
   methods: {

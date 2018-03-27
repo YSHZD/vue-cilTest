@@ -7,9 +7,9 @@ const state = {
   productDatas: '',
   colSelected: 0,
   sizeSelected: 0,
-  count: 0,
+  count: Util.getLocal('count') || 0,
   allplay: 0,
-  carList: Util.getLocal('carList') || 0
+  carList: ''
   // 全局加载状态的Loading
 }
 const mutations = {
@@ -57,8 +57,12 @@ const actions = {
   setSize ({commit}, num) {
     commit('CHANGE_SIZE_SELECTED', num)
   },
-  cutCarList ({commit}, newProduct) {
-    Util.setLocal(newProduct, 'carList')
+  cutCarList ({commit}, index) {
+    let carLists = Util.getLocal('carList')
+    let newcars = carLists.filter(function (item, key) {
+      return key !== index
+    })
+    Util.setLocal(newcars, 'carList')
     commit('CAHNGE_CAR_LIST')
   },
   setCount ({commit}, bool = true) {
@@ -78,6 +82,24 @@ const getters = {
   },
   getCarList: function (state) {
     return Util.getLocal('carList') || 0
+  },
+  selecteCount: function (state) {
+    let endNum = 0
+    state.carList.forEach(function (item, key) {
+      if (item.choseBool) {
+        endNum += item.num
+      }
+    })
+    return endNum
+  },
+  allplay: function (state) {
+    let sumPrice = 0
+    state.carList.forEach(function (item, key) {
+      if (item.choseBool) {
+        sumPrice += item.price * item.num
+      }
+    })
+    return sumPrice
   }
 }
 

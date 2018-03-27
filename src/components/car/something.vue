@@ -3,7 +3,7 @@
     <v-gologin></v-gologin>
     <ul class="something" v-if='carList'>
       <li v-for="(k,i) in carList" :key="i">
-        <div class="something-left">
+        <div class="something-left" @click="toggle">
           <label class="true" :class="{false:!k.choseBool}">
             <input type="checkbox" v-model="k.choseBool">
           </label>
@@ -42,6 +42,11 @@ export default {
       return this.$store.state.detail.carList
     }
   },
+  mounted () {
+    if (this.$store.state.detail.carList === '') {
+      this.$store.commit('CAHNGE_CAR_LIST')
+    }
+  },
   methods: {
     Num (i, bool) {
       if (bool) {
@@ -54,16 +59,16 @@ export default {
         }
       }
     },
+    toggle () {
+      setTimeout(() => {
+        this.$store.dispatch('uplate', this.carList)
+      }, 0)
+    },
     cut (i) {
+      console.log(this.carList)
       MessageBox.confirm('确定删除此订单').then(action => {
-        let newCarList = []
-        for (let k = 0; k < this.carList.length; k++) {
-          if (k !== i) {
-            newCarList.push(this.carList[i])
-          }
-        }
         this.$store.dispatch('setCount', false)
-        this.$store.dispatch('cutCarList', newCarList)
+        this.$store.dispatch('cutCarList', i)
         console.log('delete ok ' + i)
       }).catch(action => {
         console.log('取消了')
