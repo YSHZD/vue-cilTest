@@ -9,7 +9,6 @@ api.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 api.defaults.headers.post['X-Requested-With'] = 'XMLHttpRequest'
 //  请求拦截
 api.interceptors.request.use(function (config) {
-  console.log(1111)
   //  在发送请求之前做些什么
   store.commit('SET_LOADING', true)
   //  如果有token，添加到请求报文 后台会根据该报文返回status
@@ -24,7 +23,6 @@ api.interceptors.request.use(function (config) {
 })
 // 添加响应拦截器
 api.interceptors.response.use(function (response) {
-  console.log(2222)
   setTimeout(() => {
     store.commit('SET_LOADING', false)
   }, 300)

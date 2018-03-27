@@ -9,7 +9,7 @@ const state = {
   sizeSelected: 0,
   count: Util.getLocal('count') || 0,
   allplay: 0,
-  carList: ''
+  carList: Util.getLocal('carList') || 0
   // 全局加载状态的Loading
 }
 const mutations = {
@@ -26,8 +26,7 @@ const mutations = {
     state.sizeSelected = res
   },
   [types.CHANGE_COUNT] (state, res) {
-    state.count = res
-    console.log(res)
+    state.count = Util.getLocal('count')
   },
   [types.ADD_CAR_LIST] (state, res) {
     state.carList = Util.getLocal('carList')
@@ -73,6 +72,16 @@ const actions = {
       Util.setLocal(--count, 'count')
     }
     commit('CHANGE_COUNT', Util.getLocal('count'))
+  },
+  resetCarList ({commit}) {
+    const doCarList = Util.getLocal('carList')
+    let doingCar = doCarList.filter(function (item, index) {
+      return item.choseBool !== true
+    })
+    Util.setLocal(doingCar.length, 'count')
+    commit('CHANGE_COUNT')
+    Util.setLocal(doingCar, 'carList')
+    commit('CAHNGE_CAR_LIST')
   }
 }
 
@@ -100,6 +109,11 @@ const getters = {
       }
     })
     return sumPrice
+  },
+  endCarList: function (state) {
+    return state.carList.filter(function (item, index) {
+      return item.choseBool === true
+    })
   }
 }
 

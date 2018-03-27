@@ -6,6 +6,7 @@ const Category = resolve => require(['@/views/Category.vue'], resolve)
 const CategoryMain = resolve => require(['@/components/category/main.vue'], resolve)
 const Detail = resolve => require(['@/views/detail.vue'], resolve)
 const Car = resolve => require(['@/views/car.vue'], resolve)
+const Pay = resolve => require(['@/views/pay.vue'], resolve)
 export default new Router({
   routes: [
     {
@@ -29,6 +30,10 @@ export default new Router({
       path: '/car',
       name: '购物车',
       component: Car
+    }, {
+      path: '/pay',
+      name: '支付',
+      component: Pay
     }
   ]
 })

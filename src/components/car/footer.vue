@@ -29,7 +29,9 @@ export default {
   },
   methods: {
     goPay () {
-      console.log(111)
+      if (this.$store.getters.allplay > 0) {
+        this.$router.push({name: '支付'})
+      }
     }
   }
 }
