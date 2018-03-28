@@ -7,6 +7,8 @@ const CategoryMain = resolve => require(['@/components/category/main.vue'], reso
 const Detail = resolve => require(['@/views/detail.vue'], resolve)
 const Car = resolve => require(['@/views/car.vue'], resolve)
 const Pay = resolve => require(['@/views/pay.vue'], resolve)
+const Login = resolve => require(['@/components/user/index.vue'], resolve)
+const User = resolve => require(['@/components/user/user.vue'], resolve)
 export default new Router({
   routes: [
     {
@@ -34,6 +36,13 @@ export default new Router({
       path: '/pay',
       name: '支付',
       component: Pay
+    }, {
+      path: '/login',
+      name: '用户',
+      component: Login
+    }, {
+      path: '/user',
+      component: User
     }
   ]
 })
