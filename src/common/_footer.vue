@@ -41,6 +41,10 @@ export default {
           }).catch(action => {
             console.log('取消了')
           })
+        } else {
+          this.$router.push({
+            name: this.selected
+          })
         }
       } else {
         this.$router.push({
