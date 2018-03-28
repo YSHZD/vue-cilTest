@@ -3,12 +3,11 @@
     <v-header>
       <h1 slot="title">登入</h1>
     </v-header>
-    <mt-field label="帐号" placeholder="请输入帐号" v-model="username"></mt-field>
-    <mt-field label="密码" placeholder="请输入密码" type="password" v-model="password"></mt-field>
+    <mt-field v-if="toggle === 0" label="帐号" placeholder="请输入帐号" v-model="username"></mt-field>
+    <mt-field v-if="toggle === 0" label="密码" placeholder="请输入密码" type="password" v-model="password"></mt-field>
     <mt-button type="primary" size="large" @click="login">登入</mt-button>
-    <mt-button type="default" size="large" @click="loginOut">退出</mt-button>
+    <mt-button v-if="toggle === 1" type="default" size="large" @click="loginOut">退出</mt-button>
     <p>1314   ===  520</p>
-    {{toggle}}
   </div>
 </template>
 
@@ -25,9 +24,15 @@ export default {
   data () {
     return {
       username: '',
-      password: '',
-      toggle: this.$store.state.login.token
+      password: ''
     }
+  },
+  computed: {
+    toggle () {
+      return this.$store.state.login.token
+    }
+  },
+  mounted () {
   },
   methods: {
     login () {
@@ -50,6 +55,11 @@ export default {
         this.username = ''
         this.password = ''
         this.toggle = true
+        setTimeout(() => {
+          this.$router.replace({
+            path: '/'
+          })
+        })
       })
     }
   }

@@ -26,12 +26,27 @@
 </template>
 
 <script>
+import Vue from 'vue'
+import { MessageBox } from 'mint-ui'
+Vue.use(MessageBox)
 export default {
   methods: {
     gotorouter () {
-      this.$router.push({
-        name: this.selected
-      })
+      if (this.selected === '购物车') {
+        if (this.$store.state.login.token === 0) {
+          MessageBox.confirm('确定登入?').then(action => {
+            this.$router.push({
+              path: '/login'
+            })
+          }).catch(action => {
+            console.log('取消了')
+          })
+        }
+      } else {
+        this.$router.push({
+          name: this.selected
+        })
+      }
     }
   },
   data () {

@@ -1,6 +1,5 @@
 <template>
   <div class="wrap">
-    <v-gologin></v-gologin>
     <ul class="something" v-if='carList'>
       <li v-for="(k,i) in carList" :key="i">
         <div class="something-left" @click="toggle">
@@ -25,7 +24,6 @@
 </template>
 
 <script>
-import Login from '@/components/index/login.vue'
 import { MessageBox } from 'mint-ui'
 import Vue from 'vue'
 Vue.use(MessageBox)
@@ -35,7 +33,6 @@ export default {
     }
   },
   components: {
-    'v-gologin': Login
   },
   computed: {
     carList () {

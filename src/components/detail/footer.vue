@@ -3,10 +3,10 @@
     <router-link :to="{name:'首页'}" class="footer-index">
       <i class="icon-index"></i>
     </router-link>
-    <router-link :to="{name:'购物车'}" class="footer-car">
+    <strong @click="gopay" class="footer-car">
       <i class="icon-car"></i>
       <span v-if="count">{{count}}</span>
-    </router-link>
+    </strong>
     <span class="footer-addcar" @click = "addToCar">
       加入购物车
     </span>
@@ -34,31 +34,57 @@ export default {
     }
   },
   methods: {
-    addToCar () {
-      const product = [{
-        title: this.productDatasView.title,
-        price: this.productDatasView.price,
-        size: this.productDatasView.chose[this.sizeSelected].size,
-        col: this.productDatasView.chose[this.colSelected].col,
-        id: this.productDatasView.id,
-        num: this.productDatasView.num,
-        imgPath: this.$store.state.detail.productDatas.swiper[0].imgPath,
-        choseBool: false
-      }]
-      MessageBox.confirm(
-        `商品名称:${product[0].title}</br>` +
-        `价格:${product[0].price}</br>` +
-        `规格:${product[0].size}</br>` +
-        `颜色:${product[0].col}</br>` +
-        `商品ID:${product[0].id}</br>`
-      ).then(action => {
-        this.$store.dispatch('setCount', true)
-        this.$store.dispatch('addCarList', product)
-        Toast({
-          message: '添加成功',
-          duration: 1000
+    gopay () {
+      console.log(this.$store.state.login.token)
+      if (this.$store.state.login.token === 0) {
+        MessageBox.confirm('请先登入！').then(action => {
+          this.$router.push({
+            path: '/login'
+          })
+        }).catch(action => {
+          console.log('取消')
         })
-      }, err => console.log(err))
+      } else {
+        this.$router.push({
+          name: '购物车'
+        })
+      }
+    },
+    addToCar () {
+      if (this.$store.state.login.token === 0) {
+        MessageBox.confirm('请先登入！').then(action => {
+          this.$router.push({
+            path: '/login'
+          })
+        }).catch(action => {
+          console.log('取消')
+        })
+      } else {
+        const product = [{
+          title: this.productDatasView.title,
+          price: this.productDatasView.price,
+          size: this.productDatasView.chose[this.sizeSelected].size,
+          col: this.productDatasView.chose[this.colSelected].col,
+          id: this.productDatasView.id,
+          num: this.productDatasView.num,
+          imgPath: this.$store.state.detail.productDatas.swiper[0].imgPath,
+          choseBool: false
+        }]
+        MessageBox.confirm(
+          `商品名称:${product[0].title}</br>` +
+          `价格:${product[0].price}</br>` +
+          `规格:${product[0].size}</br>` +
+          `颜色:${product[0].col}</br>` +
+          `商品ID:${product[0].id}</br>`
+        ).then(action => {
+          this.$store.dispatch('setCount', true)
+          this.$store.dispatch('addCarList', product)
+          Toast({
+            message: '添加成功',
+            duration: 1000
+          })
+        }, err => console.log(err))
+      }
     }
   }
 }
