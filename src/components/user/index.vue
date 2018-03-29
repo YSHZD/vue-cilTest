@@ -44,6 +44,12 @@ export default {
             path: '/user'
           })
         })
+      } else if (this.$store.state.login.token === 1) {
+        setTimeout(() => {
+          this.$router.replace({
+            path: '/user'
+          })
+        })
       } else {
         Toast('帐号或者密码错误')
       }
