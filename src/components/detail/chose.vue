@@ -23,8 +23,8 @@
 
 <script>
 import { mapState } from 'vuex'
-import Vue from 'vue'
-Vue.use(mapState)
+// import Vue from 'vue'
+// Vue.use(mapState)
 export default {
   computed: mapState({
     view: state => state.detail.productDatas.view,

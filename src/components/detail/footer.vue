@@ -15,9 +15,9 @@
 
 <script>
 import { MessageBox, Toast } from 'mint-ui'
-import Vue from 'vue'
-Vue.use(MessageBox)
-Vue.use(Toast)
+// import Vue from 'vue'
+// Vue.use(MessageBox)
+// Vue.use(Toast)
 export default {
   computed: {
     count () {

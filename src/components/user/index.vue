@@ -16,7 +16,7 @@ import { Field, Toast, MessageBox } from 'mint-ui'
 import Vue from 'vue'
 import Header from '@/common/_header.vue'
 Vue.use(Field)
-Vue.use(Toast)
+// Vue.use(Toast)
 export default {
   components: {
     'v-header': Header

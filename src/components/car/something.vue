@@ -25,8 +25,8 @@
 
 <script>
 import { MessageBox } from 'mint-ui'
-import Vue from 'vue'
-Vue.use(MessageBox)
+// import Vue from 'vue'
+// Vue.use(MessageBox)
 export default {
   data () {
     return {
